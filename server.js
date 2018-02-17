@@ -4,6 +4,11 @@ var cache = require('memory-cache');
 var tnp = require('torrent-name-parser');
 const express = require('express');
 
+
+var tmdb = require('./lib/api-client');
+var client = new tmdb.ApiClient('129c09bb93839f3653b2510e55744d9f');
+
+
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -21,7 +26,7 @@ app.get('/api/movies', (req, res) => {
   //files = fs.readdirSync(e.path);
   files = walkSync(e.path, files)
   files.forEach(function (file, i) {
-    files[i] = tnp(file).title
+    //files[i] = tnp(file).title
 	});
   res.json({ files: files });
 });
